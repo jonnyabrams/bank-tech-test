@@ -22,5 +22,15 @@ describe('Account', () => {
       account.withdraw(1.50);
       expect(account.balance).toEqual(4.00);
     });
+    it('can not withdraw more money than is in the account', () => {
+      expect(() => { account.withdraw(10) }).toThrowError('Insufficient funds');
+    });
+  });
+  
+  describe('#getBalance', () => {
+    it('displays the account balance', () => {
+      account.deposit(10.20);
+      expect(account.getBalance()).toStrictEqual('10.20');
+    });
   });
 });
