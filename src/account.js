@@ -12,6 +12,10 @@ class Account {
     return this.transactions;
   }
 
+  getStatement() {
+    return "date || credit || debit || balance\n" + this.transactions.join("\n");
+  }
+
   deposit(amount, date = new Date().toLocaleDateString('en-GB')) {
     this.balance += amount;
     this._recordDeposit(amount, date);

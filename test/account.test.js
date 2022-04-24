@@ -46,4 +46,13 @@ describe('Account', () => {
       expect(account.getBalance()).toStrictEqual('10.20');
     });
   });
+
+  describe('#getTransactions', () => {
+    it('shows all transactions in the correct format', () => {
+      const date = '24/04/2022';
+      account.deposit(20, date);
+      account.withdraw(10, date);
+      expect(account.getStatement()).toEqual("date || credit || debit || balance\n24/04/2022 || 20 || || £20.00\n24/04/2022 || || 10 || £10.00");
+    });
+  });
 });
