@@ -1,4 +1,4 @@
-const Account = require('../lib/account');
+const Account = require('../src/account');
 
 beforeEach(() => {
   account = new Account();
@@ -23,7 +23,9 @@ describe('Account', () => {
       expect(account.balance).toEqual(4.00);
     });
     it('can not withdraw more money than is in the account', () => {
-      expect(() => { account.withdraw(10) }).toThrowError('Insufficient funds');
+      expect(() => { account.withdraw(1) }).toThrowError('Insufficient funds');
+      account.deposit(20);
+      expect(() => { account.withdraw(21) }).toThrowError('Insufficient funds');
     });
   });
   
