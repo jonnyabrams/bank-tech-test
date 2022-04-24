@@ -17,7 +17,7 @@ describe('Account', () => {
     it('records a deposit in the correct format', () => {
       const date = '24/04/2022';
       account.deposit(20, date);
-      expect(account.getTransactions()).toEqual(["24/04/2022 || 20 || || £20.00"]);
+      expect(account.transactions).toEqual(["24/04/2022 || 20 || || £20.00"]);
     });
   });
 
@@ -36,7 +36,7 @@ describe('Account', () => {
       const date = '24/04/2022';
       account.deposit(20, date);
       account.withdraw(10, date);
-      expect(account.getTransactions()).toEqual(["24/04/2022 || 20 || || £20.00", "24/04/2022 || || 10 || £10.00"]);
+      expect(account.transactions).toEqual(["24/04/2022 || 20 || || £20.00", "24/04/2022 || || 10 || £10.00"]);
     });
   });
   
