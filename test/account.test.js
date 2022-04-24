@@ -14,6 +14,10 @@ describe('Account', () => {
       account.deposit(5.50);
       expect(account.balance).toEqual(5.50)
     });
+    it('records a deposit in the correct format', () => {
+      account.deposit(20);
+      expect(account.getTransactions()).toEqual(["24/04/2022 || 20 || || £20.00"]);
+    });
   });
 
   describe('#withdraw', () => {

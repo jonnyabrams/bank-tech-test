@@ -8,7 +8,9 @@
 
 * with basic account logic in place it was time to think about storing transactions on a statement - this could get unwieldy so was time for a new class, test-driven of course
 
-* testing a statement initializes with empty array for storing transactions was straightforward, now had to implement the logic for actually storing them - then realised it would probably be helpful to have a separate Transaction class to convert them into the right format, in a single string as per the specification - so I parked the Statement and test-drove Transaction
+* testing a statement initializes with empty array for storing transactions was straightforward, now had to implement the logic for actually storing them so test-drove a 'private' function for recording deposits and withdrawals in the correct format
+
+* 
 
 ### Acceptance criteria
 
