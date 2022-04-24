@@ -17,14 +17,19 @@ class Account {
     this._recordDeposit(amount, date);
   };
 
-  withdraw(amount) {
+  withdraw(amount, date = new Date().toLocaleDateString('en-GB')) {
     if(amount > this.balance) throw new Error('Insufficient funds');
   
     this.balance -= amount;
+    this._recordWithdrawal(amount, date);
   };
 
   _recordDeposit(amount, date) {
-    this.transactions.push(`${date} || ${amount} || || £${this.getBalance()}`)
+    this.transactions.push(`${date} || ${amount} || || £${this.getBalance()}`);
+  }
+
+  _recordWithdrawal(amount, date) {
+    this.transactions.push(`${date} || || ${amount} || £${this.getBalance()}`);
   }
 };
 
