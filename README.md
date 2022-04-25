@@ -23,7 +23,7 @@ date || credit || debit || balance
 
 ## Example of Use
 
-<img src="https://imgur.com/DHSMZmZ">
+<img src="images/bank-tech-test.jpg">
 
 * test-drive Account class, first expecting it to initialize with default balance of 0
 
