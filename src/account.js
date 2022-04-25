@@ -15,6 +15,7 @@ class Account {
   deposit(amount, date = new Date().toLocaleDateString('en-GB')) {
     this.balance += amount;
     this.#recordDeposit(amount, date);
+    return this.getBalance();
   }
 
   withdraw(amount, date = new Date().toLocaleDateString('en-GB')) {
@@ -22,6 +23,7 @@ class Account {
   
     this.balance -= amount;
     this.#recordWithdrawal(amount, date);
+    return this.getBalance();
   }
 
   #recordDeposit(amount, date) {

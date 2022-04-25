@@ -1,6 +1,29 @@
 # Bank Tech Test
 
-* install Node and Jest (clone repo as instruction for use)
+## Description
+
+As a tech test while attending the Makers Academy boot camp, I built this basic bank account program that's intended only for interaction in the Node REPL. It lets you create a new account, desposit and withdraw funds, and view a statement in a specified format.
+
+The instructed output format was as follows:
+
+```
+date || credit || debit || balance
+14/01/2023 || || 500.00 || 2500.00
+13/01/2023 || 2000.00 || || 3000.00
+10/01/2023 || 1000.00 || || 1000.00
+```
+
+## Instructions for Use
+
+* Clone this repo
+* Install nvm and Node
+* Move into the project directory
+* Run the command `node` to initiate the REPL and then load the application with `.load src/account.js`
+* To run the tests, install Jest with `npm install jest` and then run simply `jest`
+
+## Example of Use
+
+<img src="https://imgur.com/DHSMZmZ">
 
 * test-drive Account class, first expecting it to initialize with default balance of 0
 
