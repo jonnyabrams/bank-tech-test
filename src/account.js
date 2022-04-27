@@ -1,15 +1,9 @@
+const Statement = require('./statement');
+
 class Account {
   constructor() {
     this.balance = 0;
-    this.transactions = []
-  }
-
-  getBalance() {
-    return this.balance.toFixed(2);
-  }
-
-  getStatement() {
-    return "date || credit || debit || balance\n" + this.transactions.join("\n");
+    this.statement = new Statement();
   }
 
   deposit(amount, date = new Date().toLocaleDateString('en-GB')) {
@@ -26,12 +20,20 @@ class Account {
     return this.getBalance();
   }
 
+  getBalance() {
+    return this.balance;
+  }
+
+  getStatement() {
+    console.log(this.statement.print());
+  }
+
   #recordDeposit(amount, date) {
-    this.transactions.push(`${date} || ${amount} || || £${this.getBalance()}`);
+    this.statement.transactions.push([date, amount, this.balance]);
   }
 
   #recordWithdrawal(amount, date) {
-    this.transactions.push(`${date} || || ${amount} || £${this.getBalance()}`);
+    this.statement.transactions.push([date, amount * -1, this.balance]);
   }
 }
 

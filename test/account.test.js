@@ -14,11 +14,11 @@ describe('Account', () => {
       account.deposit(5.50);
       expect(account.balance).toEqual(5.50)
     });
-    it('records a deposit in the correct format', () => {
-      const date = '24/04/2022';
-      account.deposit(20, date);
-      expect(account.transactions).toEqual(["24/04/2022 || 20 || || £20.00"]);
-    });
+    // it('records the transaction', () => {
+    //   const date = '24/04/2022';
+    //   account.deposit(20, date);
+    //   expect(account.statement.transactions.length()).toEqual(1);
+    // });
   });
 
   describe('#withdraw', () => {
@@ -32,27 +32,31 @@ describe('Account', () => {
       account.deposit(20);
       expect(() => { account.withdraw(21) }).toThrowError('Insufficient funds');
     });
-    it('records a withdrawal in the correct format', () => {
-      const date = '24/04/2022';
-      account.deposit(20, date);
-      account.withdraw(10, date);
-      expect(account.transactions).toEqual(["24/04/2022 || 20 || || £20.00", "24/04/2022 || || 10 || £10.00"]);
-    });
+    // it('records a withdrawal in the correct format', () => {
+    //   const date = '24/04/2022';
+    //   account.deposit(20, date);
+    //   account.withdraw(10, date);
+    //   expect(account.transactions).toEqual(["24/04/2022 || 20 || || £20.00", "24/04/2022 || || 10 || £10.00"]);
+    // });
   });
   
   describe('#getBalance', () => {
     it('displays the account balance', () => {
       account.deposit(10.20);
-      expect(account.getBalance()).toStrictEqual('10.20');
+      expect(account.getBalance()).toEqual(10.20);
     });
   });
 
-  describe('#getTransactions', () => {
-    it('shows all transactions in the correct format', () => {
+  describe('#getStatement', () => {
+    it('shows all transactions in reverse chronological order', () => {
       const date = '24/04/2022';
       account.deposit(20, date);
       account.withdraw(10, date);
-      expect(account.getStatement()).toEqual("date || credit || debit || balance\n24/04/2022 || 20 || || £20.00\n24/04/2022 || || 10 || £10.00");
+      console.log = jest.fn();
+      account.getStatement();
+      expect(console.log).toHaveBeenCalledWith('date || credit || debit || balance\n' +
+      '24/04/2022 || || £10.00 || £10.00\n' +
+      '24/04/2022 || £20.00 || || £20.00');
     });
   });
 });
