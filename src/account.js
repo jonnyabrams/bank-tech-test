@@ -1,22 +1,24 @@
 const Statement = require('./statement');
+const Transaction = require('./transaction');
 
 class Account {
-  constructor() {
+  constructor(statement = new Statement(), transaction = Transaction) {
     this.balance = 0;
-    this.statement = new Statement();
+    this.statement = statement;
+    this.transaction = transaction;
   }
 
-  deposit(amount, date = new Date().toLocaleDateString('en-GB')) {
+  deposit(amount) {
     this.balance += amount;
-    this.#recordDeposit(amount, date);
+    this.#recordDeposit(amount);
     return this.getBalance();
   }
 
-  withdraw(amount, date = new Date().toLocaleDateString('en-GB')) {
+  withdraw(amount) {
     if(amount > this.balance) throw new Error('Insufficient funds');
   
     this.balance -= amount;
-    this.#recordWithdrawal(amount, date);
+    this.#recordWithdrawal(amount);
     return this.getBalance();
   }
 
@@ -28,12 +30,14 @@ class Account {
     console.log(this.statement.print());
   }
 
-  #recordDeposit(amount, date) {
-    this.statement.transactions.push([date, amount, this.balance]);
+  #recordDeposit(amount) {
+    this.statement.transactions.push(
+      new this.transaction({amount: amount, balance: this.balance}));
   }
 
-  #recordWithdrawal(amount, date) {
-    this.statement.transactions.push([date, amount * -1, this.balance]);
+  #recordWithdrawal(amount) {
+    this.statement.transactions.push(
+      new this.transaction({amount: amount * -1, balance: this.balance}));
   }
 }
 

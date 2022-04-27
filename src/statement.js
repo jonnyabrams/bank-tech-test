@@ -5,17 +5,17 @@ class Statement {
   }
 
   print() {
-    return this.header + this.formatStatementRows().reverse().join('\n');
+    return this.header + this.#formatStatementRows().reverse().join('\n');
   }
  
-  formatStatementRows() {
+  #formatStatementRows() {
     return this.transactions.map((transaction) => {
-      if (transaction[1] > 0) {
-        return `${transaction[0]} || £${transaction[1].toFixed(2)} || || £${transaction[2].toFixed(2)}`;
+      if (transaction.amount > 0) {
+        return `${transaction.date} || £${transaction.amount.toFixed(2)} || || £${transaction.balance.toFixed(2)}`;
       } 
       
-      if (transaction[1] < 0) {
-        return `${transaction[0]} || || £${(transaction[1] * -1).toFixed(2)} || £${transaction[2].toFixed(2)}`;
+      if (transaction.amount < 0) {
+        return `${transaction.date} || || £${(transaction.amount * -1).toFixed(2)} || £${transaction.balance.toFixed(2)}`;
       }
     })
   }
