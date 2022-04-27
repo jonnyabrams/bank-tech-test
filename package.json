@@ -22,6 +22,6 @@
     "moment": "^2.29.3"
   },
   "devDependencies": {
-   
+    "jest-date-mock": "^1.0.8"
   }
 }

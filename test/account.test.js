@@ -1,7 +1,13 @@
 const Account = require('../src/account');
+const dateMock = require("jest-date-mock");
 
 beforeEach(() => {
   account = new Account();
+  dateMock.advanceTo(new Date(2022, 0, 1, 0, 0, 0))
+});
+
+afterAll(() => {
+  dateMock.clear();
 });
 
 describe('Account', () => {
@@ -49,14 +55,13 @@ describe('Account', () => {
 
   describe('#getStatement', () => {
     it('shows all transactions in reverse chronological order', () => {
-      const date = '24/04/2022';
-      account.deposit(20, date);
-      account.withdraw(10, date);
+      account.deposit(20);
+      account.withdraw(10);
       console.log = jest.fn();
       account.getStatement();
       expect(console.log).toHaveBeenCalledWith('date || credit || debit || balance\n' +
-      '24/04/2022 || || £10.00 || £10.00\n' +
-      '24/04/2022 || £20.00 || || £20.00');
+      '01/01/2022 || || £10.00 || £10.00\n' +
+      '01/01/2022 || £20.00 || || £20.00');
     });
   });
 });
