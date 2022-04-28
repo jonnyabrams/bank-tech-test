@@ -20,11 +20,11 @@ describe('Account', () => {
       account.deposit(5.50);
       expect(account.balance).toEqual(5.50)
     });
-    // it('records the transaction', () => {
-    //   const date = '24/04/2022';
-    //   account.deposit(20, date);
-    //   expect(account.statement.transactions.length()).toEqual(1);
-    // });
+
+    it('records the transaction', () => {
+      account.deposit(20);
+      expect(account.statement.transactions.length).toEqual(1);
+    });
   });
 
   describe('#withdraw', () => {
@@ -38,12 +38,11 @@ describe('Account', () => {
       account.deposit(20);
       expect(() => { account.withdraw(21) }).toThrowError('Insufficient funds');
     });
-    // it('records a withdrawal in the correct format', () => {
-    //   const date = '24/04/2022';
-    //   account.deposit(20, date);
-    //   account.withdraw(10, date);
-    //   expect(account.transactions).toEqual(["24/04/2022 || 20 || || £20.00", "24/04/2022 || || 10 || £10.00"]);
-    // });
+    it('records the transaction', () => {
+      account.deposit(20);
+      account.withdraw(10);
+      expect(account.statement.transactions.length).toEqual(2);
+    });
   });
   
   describe('#getBalance', () => {
