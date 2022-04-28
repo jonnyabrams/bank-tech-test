@@ -12,4 +12,10 @@ describe('Statement', () => {
   it('has an empty array for storing transactions', () => {
     expect(statement.transactions).toEqual([])
   });
+
+  describe('print', () => {
+    it('begins with a header', () => {
+      expect(statement.print()).toEqual('date || credit || debit || balance\n');
+    });
+  });
 });
