@@ -33,11 +33,13 @@ describe('Account', () => {
       account.withdraw(1.50);
       expect(account.balance).toEqual(4.00);
     });
+
     it('can not withdraw more money than is in the account', () => {
       expect(() => { account.withdraw(1) }).toThrowError('Insufficient funds');
       account.deposit(20);
       expect(() => { account.withdraw(21) }).toThrowError('Insufficient funds');
     });
+
     it('records the transaction', () => {
       account.deposit(20);
       account.withdraw(10);

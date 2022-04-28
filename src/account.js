@@ -16,6 +16,7 @@ class Account {
 
   withdraw(amount) {
     if(amount > this.balance) throw new Error('Insufficient funds');
+    if(typeof amount !== 'number') throw new Error('Not a number');
   
     this.balance -= amount;
     this.#recordWithdrawal(amount);
